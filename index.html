@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Hosted Cloud Infrastructure Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f9ff;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .flow-box {
+            border: 2px solid #94d2bd;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s;
+        }
+        .flow-box:hover {
+            transform: translateY(-5px);
+        }
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #0a9396;
+            margin: 0.5rem 0;
+        }
+        .flow-arrow-horizontal {
+            writing-mode: horizontal-tb;
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#005f73] mb-2">Building a Self-Hosted Cloud</h1>
+            <p class="text-lg text-[#0a9396]">An Infographic on Transforming Ubuntu Desktops into a Centralized RMM, NAS, and Remote Access Solution</p>
+        </header>
+
+        <main class="space-y-16">
+
+            <section id="overview" class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-bold text-[#005f73] mb-4 text-center">Architectural Overview</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+                    This solution transforms up to 12 Ubuntu desktops into a unified private cloud. A central "Controller" machine orchestrates all services, while "Client" machines provide storage and serve as remote access points.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center">
+                        <div class="text-8xl font-black text-[#ee9b00]">1</div>
+                        <h3 class="text-2xl font-bold text-[#005f73] mt-2">Controller Node</h3>
+                        <p class="text-gray-600 mt-2">The brain of the operation. Hosts all core services, manages data aggregation, and serves as the single entry point for all web access.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-8xl font-black text-[#0a9396]">10-12</div>
+                        <h3 class="text-2xl font-bold text-[#005f73] mt-2">Client Nodes</h3>
+                        <p class="text-gray-600 mt-2">The workforce. These machines contribute their storage via SSH and are accessible for remote desktop sessions through the controller.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="stack">
+                <h2 class="text-3xl font-bold text-[#005f73] mb-8 text-center">The Core Service Stack</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col justify-center">
+                        <h3 class="text-2xl font-bold text-[#005f73] mb-4 text-center">Service Distribution</h3>
+                        <p class="text-center text-gray-600 mb-6">
+                            The controller runs a suite of powerful open-source tools, each containerized or installed via Snap for stability and easy management. This chart shows the primary function of each core component.
+                        </p>
+                        <div class="chart-container h-[400px] md:h-[450px]">
+                            <canvas id="serviceStackChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold text-[#005f73] mb-4 text-center">Component Functionality</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="text-2xl text-[#ee9b00] mr-4">➔</span>
+                                <div>
+                                    <h4 class="font-bold">MeshCentral</h4>
+                                    <p class="text-gray-600">Provides a centralized Remote Management & Monitoring (RMM) dashboard, similar to an AWS EC2 console, for full control over all client nodes.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-2xl text-[#ee9b00] mr-4">➔</span>
+                                <div>
+                                    <h4 class="font-bold">Nextcloud</h4>
+                                    <p class="text-gray-600">Creates a web-accessible Network Attached Storage (NAS) interface, like Google Drive, for the pooled data from all clients.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-2xl text-[#ee9b00] mr-4">➔</span>
+                                <div>
+                                    <h4 class="font-bold">Apache Guacamole</h4>
+                                    <p class="text-gray-600">Offers clientless, browser-based remote desktop access to all client machines using SSH, eliminating the need for local apps.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-2xl text-[#ee9b00] mr-4">➔</span>
+                                <div>
+                                    <h4 class="font-bold">Nginx & Certbot</h4>
+                                    <p class="text-gray-600">A reverse proxy that securely routes traffic to the correct service, with free SSL/TLS certificates from Let's Encrypt for HTTPS.</p>
+                                </div>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="text-2xl text-[#ee9b00] mr-4">➔</span>
+                                <div>
+                                    <h4 class="font-bold">Cockpit (Optional)</h4>
+                                    <p class="text-gray-600">A web-based dashboard for managing the controller server itself, providing insights into system resources and logs.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dataflow">
+                <h2 class="text-3xl font-bold text-[#005f73] mb-8 text-center">Data & Control Flow</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+                    The system uses a clever combination of SSHFS and MergerFS to pool distributed storage, making it accessible through a single interface. This diagram illustrates the journey of data from clients to your browser.
+                </p>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                    <div class="flex flex-col md:flex-row md:space-x-4 items-center justify-center">
+                        <div class="flow-box w-full md:w-1/4">
+                            <div class="text-4xl mb-2">💻</div>
+                            <h4 class="font-bold text-[#005f73]">Client Machines</h4>
+                            <p class="text-sm text-gray-500">Data in `/home/ubuntu/data` on each machine.</p>
+                        </div>
+                        <div class="flow-arrow md:flow-arrow-horizontal">→</div>
+                        <div class="flow-box w-full md:w-1/4">
+                            <div class="text-4xl mb-2">🔐</div>
+                            <h4 class="font-bold text-[#005f73]">SSHFS Mounts</h4>
+                            <p class="text-sm text-gray-500">Controller mounts each client's data folder into `/mnt/clients/` via secure SSH.</p>
+                        </div>
+                        <div class="flow-arrow md:flow-arrow-horizontal">→</div>
+                        <div class="flow-box w-full md:w-1/4">
+                            <div class="text-4xl mb-2">➕</div>
+                            <h4 class="font-bold text-[#005f73]">MergerFS Pool</h4>
+                            <p class="text-sm text-gray-500">All SSHFS mounts are unified into a single virtual directory: `/mnt/pooled_data`.</p>
+                        </div>
+                        <div class="flow-arrow md:flow-arrow-horizontal">→</div>
+                        <div class="flow-box w-full md:w-1/4">
+                            <div class="text-4xl mb-2">☁️</div>
+                            <h4 class="font-bold text-[#005f73]">Nextcloud Access</h4>
+                            <p class="text-sm text-gray-500">The pooled directory is served by Nextcloud, accessible via `cloud.yourdomain.org`.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="security">
+                <h2 class="text-3xl font-bold text-[#005f73] mb-8 text-center">Security Posture</h2>
+                 <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+                    A multi-layered security approach protects the entire infrastructure, from the network perimeter to individual services.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <div class="text-5xl mb-4">🛡️</div>
+                        <h3 class="text-xl font-bold text-[#005f73]">UFW Firewall</h3>
+                        <p class="text-gray-600 mt-2">The Uncomplicated Firewall is enabled on the controller, restricting access to only essential ports (SSH, HTTP, HTTPS).</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <div class="text-5xl mb-4">🚫</div>
+                        <h3 class="text-xl font-bold text-[#005f73]">Fail2Ban</h3>
+                        <p class="text-gray-600 mt-2">Actively monitors logs for malicious login attempts and automatically bans offending IP addresses to prevent brute-force attacks.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <div class="text-5xl mb-4">🔒</div>
+                        <h3 class="text-xl font-bold text-[#005f73]">Let's Encrypt SSL</h3>
+                        <p class="text-gray-600 mt-2">All web traffic is encrypted with free, auto-renewing SSL/TLS certificates, ensuring secure connections to all services.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <div class="text-5xl mb-4">🔑</div>
+                        <h3 class="text-xl font-bold text-[#005f73]">Key-Based Auth</h3>
+                        <p class="text-gray-600 mt-2">SSHFS mounts rely on passwordless SSH key authentication, providing a secure and automated way to connect to client storage.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="automation">
+                <h2 class="text-3xl font-bold text-[#005f73] mb-8 text-center">Deployment Automation Breakdown</h2>
+                <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg">
+                     <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+                        The entire setup is orchestrated by a single Bash script. This chart visualizes the major stages of the automated deployment process, showing the relative effort and complexity of each phase.
+                    </p>
+                    <div class="chart-container h-[450px] md:h-[500px]">
+                        <canvas id="deploymentStagesChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-16 pt-8 border-t border-gray-300">
+            <p class="text-gray-500">Infographic generated based on the "Self-Hosted Cloud NAS Setup" technical report.</p>
+            <p class="text-sm text-gray-400 mt-2">This is a visual representation and does not contain any SVG or Mermaid JS.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const brilliantBlues = {
+            darkTeal: '#005f73',
+            teal: '#0a9396',
+            lightTeal: '#94d2bd',
+            sand: '#e9d8a6',
+            gold: '#ee9b00',
+            darkRed: '#ae2012',
+            lightGray: '#e5e7eb',
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            }
+            return label;
+        };
+
+        const wrapLabel = (label, maxLength = 16) => {
+            if (label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            lines.push(currentLine.trim());
+            return lines;
+        };
+
+        const serviceStackCtx = document.getElementById('serviceStackChart').getContext('2d');
+        new Chart(serviceStackCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Remote Management', 'File Access (NAS)', 'Remote Desktop', 'Web Proxy & Security', 'System Dashboard'],
+                datasets: [{
+                    label: 'Core Services',
+                    data: [25, 25, 20, 20, 10],
+                    backgroundColor: [
+                        brilliantBlues.darkTeal,
+                        brilliantBlues.teal,
+                        brilliantBlues.gold,
+                        brilliantBlues.lightTeal,
+                        brilliantBlues.lightGray
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 4,
+                    hoverOffset: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14,
+                                family: 'Inter'
+                            },
+                             color: '#374151'
+                        }
+                    },
+                    title: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+        
+        const deploymentStagesCtx = document.getElementById('deploymentStagesChart').getContext('2d');
+        const originalLabels = [
+            'System Prep & Security', 
+            'Docker & Service Containers (Mesh, Guac)', 
+            'Nextcloud & DDNS Setup', 
+            'Nginx Reverse Proxy & SSL', 
+            'LAN Discovery & SSH Key Distribution', 
+            'Storage Pooling (SSHFS & MergerFS)'
+        ];
+        const wrappedLabels = originalLabels.map(label => wrapLabel(label));
+
+        new Chart(deploymentStagesCtx, {
+            type: 'bar',
+            data: {
+                labels: wrappedLabels,
+                datasets: [{
+                    label: 'Relative Complexity/Time',
+                    data: [15, 25, 20, 30, 20, 25],
+                    backgroundColor: [
+                        brilliantBlues.lightTeal,
+                        brilliantBlues.darkTeal,
+                        brilliantBlues.teal,
+                        brilliantBlues.darkRed,
+                        brilliantBlues.gold,
+                        brilliantBlues.sand
+                    ],
+                    borderRadius: 4,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            font: {
+                                size: 12,
+                                family: 'Inter'
+                            },
+                            color: '#374151'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
