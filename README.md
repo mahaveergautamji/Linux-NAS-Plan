@@ -59,24 +59,8 @@ A single Bash script automates the entire setup process, including:
 - **Domain Name**: For Nextcloud and service access (e.g., `cloud.yourdomain.org`).
 - **Dependencies**: Bash, Docker, Snap, and an active internet connection.
 
-## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/self-hosted-cloud.git
-   cd self-hosted-cloud
-   ```
-
-2. Configure environment variables:
-   - Edit `config.env` to specify your domain, SSH keys, and client IPs.
-
-3. Run the deployment script:
-   ```bash
-   chmod +x deploy.sh
-   ./deploy.sh
-   ```
-
-4. Access services:
+   : Access services:
    - **RMM**: `https://rmm.yourdomain.org` (MeshCentral)
    - **NAS**: `https://cloud.yourdomain.org` (Nextcloud)
    - **Remote Desktop**: `https://remote.yourdomain.org` (Apache Guacamole)
